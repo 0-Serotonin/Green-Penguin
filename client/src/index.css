@@ -1,0 +1,152 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.349);
+}
+
+.nav-link {
+  color: #e1fff0;
+  text-decoration: underline;
+}
+.nav-link:hover {
+  color: #4ff1a0;
+  text-decoration: underline;
+}
+
+.search {
+  position: absolute;
+  top: 8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 400px;
+  z-index: 10;
+}
+
+.search input {
+  padding: 0.05rem;
+  font-size: 1.5rem;
+  width: 100%;
+}
+
+.locate {
+  position: absolute;
+  top: 8rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  z-index: 10;
+}
+.locate img {
+  width: 40px;
+  cursor: pointer;
+}
+.comment-actions {
+  display: flex;
+  font-size: 14px;
+  color: rgb(51, 51, 51);
+  cursor: pointer;
+}
+
+.comment-action {
+  margin-right: 8px;
+}
+
+.comment-form-textarea {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  border: 1px solid rgb(107, 114, 12);
+}
+
+.comment-form-button {
+  font-size: 16px;
+  padding: 8px 16px;
+  background: rgb(59, 130, 246);
+  border-radius: 8px;
+  color: white;
+}
+
+.comment-form-cancel-button {
+  margin-left: 10px;
+}
+
+.title-form-textarea {
+  width: 100%;
+  height: 30px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  border: 1px solid rgb(107, 114, 12);
+}
+
+.thread-form-title {
+  font-size: 22px;
+}
+
+.comment-action:hover {
+  text-decoration: underline;
+}
+
+.thread-form-textarea {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+  border: 1px solid rgb(107, 114, 12);
+}
+
+.child-comment-width {
+  width: 80%;
+  margin-left: 40px;
+  padding-bottom: 15px;
+}
+
+.parent-comment-width {
+  width: 80%;
+  padding-bottom: 10px;
+}
+
+.view-comment-text {
+  font-size: 14px;
+  padding-bottom: 5px;
+  margin: 0;
+  color: gray;
+}
+
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background-color: grey;
+  color: white;
+  text-align: center;
+}
+
+.contact {
+  height: 90vh;
+}
+
+.login {
+  height: 90vh;
+}
+
+.browse {
+  min-height: 90vh;
+}

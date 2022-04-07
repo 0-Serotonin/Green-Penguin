@@ -1,0 +1,70 @@
+{
+  "name": "green-pirates",
+  "engines": {
+    "node": "v16.13.1",
+    "npm": "8.4.0"
+  },
+  "version": "0.1.0",
+  "private": true,
+  "homepage": ".",
+  "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@reach/combobox": "^0.16.5",
+    "@react-google-maps/api": "^2.7.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
+    "antd": "^4.19.4",
+    "axios": "^0.26.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "google-maps-react": "^2.0.6",
+    "history": "^5.1.0",
+    "mongoose": "^6.2.7",
+    "nodemon": "^2.0.15",
+    "react": "^16.12.0",
+    "react-bootstrap": "^2.2.2",
+    "react-dom": "^16.12.0",
+    "react-google-login": "^5.2.2",
+    "react-router-dom": "^6.0.2",
+    "react-scripts": "5.0.0",
+    "styled-components": "^5.3.3",
+    "use-places-autocomplete": "^2.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "proxy": "http://localhost:3001",
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
