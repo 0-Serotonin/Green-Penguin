@@ -16,14 +16,12 @@ function Forum(){
     const[postPerPage] = useState(10)
 
     useEffect(() =>{
-        axios.get('/api/thread/getThread')
-         .then(res =>{
-            if(res.ok){
-                return res.json()
-            }
-        })
-        .then(jsonRes => setThreads(jsonRes))
+        axios
+            .get('/api/thread/getThread')
+            .then((threads) => setThreads(threads))
+            .catch((err) => console.log(err))
     }, [])
+    
     console.log(threads)
     const indexOfLastPost = pageNumber * postPerPage
     const indexOfFirstPost = indexOfLastPost - postPerPage
