@@ -7,10 +7,10 @@ const comment = require('./routes/commentRoute')
 const path = require('path')
 
 require('dotenv').config()
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 5000
 
 mongoose.Promise = global.Promise
-dbURL = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASSWORD}@cluster0.u079k.mongodb.net/forum-app?retryWrites=true&w=majority`
+dbURL = `mongodb+srv://user:password1!@cluster0.u079k.mongodb.net/forum-app?retryWrites=true&w=majority`
 
 mongoose.connect(dbURL)
  .catch((err) => console.log(err.message))

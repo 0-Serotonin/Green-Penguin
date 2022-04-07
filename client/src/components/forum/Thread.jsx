@@ -16,7 +16,7 @@ function Thread(){
         threadId:id
     }
     useEffect(() =>{
-        fetch(`http://localhost:3001/api/thread/${id}`)
+        fetch(`/api/thread/${id}`)
          .then((res) =>{
              if(res.ok){
                  return res.json()
@@ -31,7 +31,7 @@ function Thread(){
              setData(text)
          })
 
-        axios.post("http://localhost:3001/api/comment/getComment",threadId)
+        axios.post("/api/comment/getComment",threadId)
          .then((response)=>{
              if(response.data.success){
                  setCommentLists(response.data.comments)
