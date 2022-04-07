@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import Pagination from './Pagination';
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
 function Forum(){
 
@@ -15,7 +16,7 @@ function Forum(){
     const[postPerPage] = useState(10)
 
     useEffect(() =>{
-        fetch('/api/thread/getThread')
+        axios.get('/api/thread/getThread')
          .then(res =>{
             if(res.ok){
                 return res.json()
