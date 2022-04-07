@@ -16,17 +16,12 @@ function Thread(){
         threadId:id
     }
     useEffect(() =>{
-        fetch(`http://localhost:3001/api/thread/${id}`)
-         .then((res) =>{
-             if(res.ok){
-                 return res.json()
-             }
-         })
-         .then((foundThread) => {
+        axios.get(`/api/thread/${id}`)
+         .then((res) => {
              let text = {
-                 title: foundThread.title,
-                 content: foundThread.content,
-                 user: foundThread.user
+                 title: res.data.title,
+                 content: res.data.content,
+                 user: res.data.user
              }
              setData(text)
          })
