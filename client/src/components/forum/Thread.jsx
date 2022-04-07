@@ -26,7 +26,7 @@ function Thread(){
              setData(text)
          })
 
-        axios.post("http://localhost:3001/api/comment/getComment",threadId)
+        axios.post("/api/comment/getComment",threadId)
          .then((response)=>{
              if(response.data.success){
                  setCommentLists(response.data.comments)

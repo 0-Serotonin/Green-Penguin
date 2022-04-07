@@ -16,6 +16,7 @@ function SingleComment(props) {
     const isTextareaDisabled = CommentValue.content.length===0
 
     function handleClick(event){
+        console.log('Comment Clicked')
         event.preventDefault()
         const variable ={
             comment:CommentValue.content,
