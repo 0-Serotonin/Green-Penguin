@@ -23,7 +23,7 @@ function Forum(){
         })
         .then(jsonRes => setThreads(jsonRes))
     }, [])
-
+    console.log(threads)
     const indexOfLastPost = pageNumber * postPerPage
     const indexOfFirstPost = indexOfLastPost - postPerPage
     const currentPosts = threads.slice(indexOfFirstPost, indexOfLastPost)
