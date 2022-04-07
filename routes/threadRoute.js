@@ -17,10 +17,12 @@ router.route('/createThread').post((req,res) =>{
     newThread.save()
 })
 
-router.route('/getThread').get((req,res) =>{
+router.get('/getThread', (req,res) =>{
     console.log('Finding threads')
     Thread.find()
         .then(foundThread => res.json(foundThread))
+        .catch(err => console.log(err));
+    
 })
 
 router.route('/:id').get((req,res) =>{

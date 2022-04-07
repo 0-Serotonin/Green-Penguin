@@ -25,7 +25,7 @@ function SingleComment(props) {
             user: User.name
         }
         
-        axios.post('/api/comment/createComment', variable)
+        axios.post('http://localhost:3001/api/comment/createComment', variable)
             .then(response =>{
                 if(response.data.success){
                     setOpenReply(!OpenReply)

@@ -30,7 +30,7 @@ function Comments(props) {
             userID: User.googleId,
             user: User.name
         }
-        axios.post('/api/comment/createComment', newComment)
+        axios.post('http://localhost:3001/api/comment/createComment', newComment)
          .then((response)=>{
             if(response.data.success){
                 props.refreshFunction(response.data.result)
