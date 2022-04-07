@@ -18,6 +18,7 @@ router.route('/createThread').post((req,res) =>{
 })
 
 router.route('/getThread').get((req,res) =>{
+    console.log('Finding threads')
     Thread.find()
         .then(foundThread => res.json(foundThread))
 })
