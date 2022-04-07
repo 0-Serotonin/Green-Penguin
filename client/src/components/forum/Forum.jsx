@@ -20,6 +20,7 @@ function Forum(){
             .then((posts) => setThreads(posts.data))
             .catch((err) => console.log(err));
     }, [])
+    
     const indexOfLastPost = pageNumber * postPerPage
     const indexOfFirstPost = indexOfLastPost - postPerPage
     const currentPosts = threads.slice(indexOfFirstPost, indexOfLastPost)

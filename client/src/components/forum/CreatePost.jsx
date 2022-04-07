@@ -30,7 +30,7 @@ function CreatePost(){
             userID: User.googleId,
             user: User.name
         }
-        axios.post('http://localhost:3001/api/thread/createThread', newThread)
+        axios.post('/api/thread/createThread', newThread)
         navigate('/forum')
     }
 

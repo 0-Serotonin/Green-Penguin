@@ -55,7 +55,7 @@ function SingleComment(props) {
     
     function deleteReply(event){
         event.preventDefault()
-        axios.delete('http://localhost:3001/api/comment/deleteComment', {data: {
+        axios.delete('/api/comment/deleteComment', {data: {
             commentId: props.comment._id}
         })
             .then((response) =>{
@@ -87,7 +87,7 @@ function SingleComment(props) {
             content: EditCommentValue.content,
             commentId: props.comment._id
         }
-        axios.post('http://localhost:3001/api/comment/updateComment', updateComment)
+        axios.post('/api/comment/updateComment', updateComment)
             .then((response) => {
                 if(response.data.success){
                     alert("Comment edited successfully")
