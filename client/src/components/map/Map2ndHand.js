@@ -84,7 +84,7 @@ export default function Map() {
     const [selectedPoint, setSelectedPoint] = useState(null);
 
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
+        googleMapsApiKey: "AIzaSyBL0wqyCym-8QPPVK-ZME2-trqeA89EN7c",
         libraries,
     })
 
