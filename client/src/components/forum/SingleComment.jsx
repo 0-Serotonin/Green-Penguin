@@ -3,7 +3,6 @@ import axios from 'axios'
 import {UserContext} from '../UserContext'
 
 function SingleComment(props) {
-
     const {User} = useContext(UserContext)
     const [EditCommentValue, setEditCommentValue] = useState({
         content:props.comment.comment,
@@ -22,7 +21,7 @@ function SingleComment(props) {
             comment:CommentValue.content,
             threadId:props.threadId,
             responseTo:props.comment._id,
-            userID: User.googleId,
+            userID: Number(User.googleId),
             user: User.name
         }
         
@@ -114,15 +113,14 @@ function SingleComment(props) {
     return (
         
         <div>
-            {console.log(Number(User.googleId))}
             <h3 style={userName}>{props.comment.user}: </h3>
             <h2>{props.comment.comment}</h2>
             <div className='comment-actions'>
                         <div onClick={enableReply} className="comment-action">Reply</div>
                         <div onClick={editReply} className="comment-action" 
-                            style={{visibility: props.comment.user ===  User.name ? "visible" : "hidden"}}  >Edit</div>
+                            style={{visibility: props.comment.userID ===  Number(User.googleId) ? "visible" : "hidden"}}  >Edit</div>
                         <div onClick={deleteReply} className="comment-action" 
-                            style={{visibility: props.comment.user ===  User.name ? "visible" : "hidden"}} >Delete</div>
+                            style={{visibility: props.comment.userID ===  Number(User.googleId) ? "visible" : "hidden"}} >Delete</div>
             </div>
             {OpenReply && (
             <form>
