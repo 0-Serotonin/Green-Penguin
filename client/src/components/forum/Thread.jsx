@@ -1,16 +1,20 @@
 import axios from 'axios'
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {useParams} from 'react-router-dom'
 import Comments from './Comments'
-
+import {UserContext} from '../UserContext'
+import {useNavigate} from "react-router-dom";
 
 function Thread(){
+    let navigate = useNavigate()
+    const {User} = useContext(UserContext)
     const {id} = useParams()
     const [CommentLists,setCommentLists] = useState([])
     const [data,setData] = useState({
         title:'',
         content:'',
-        user:''
+        user:'',
+        userId:''
     })
     const threadId = {
         threadId:id
@@ -21,7 +25,8 @@ function Thread(){
              let text = {
                  title: res.data.title,
                  content: res.data.content,
-                 user: res.data.user
+                 user: res.data.user,
+                 userId: res.data.userId
              }
              setData(text)
          })
@@ -62,6 +67,22 @@ function Thread(){
 
     }
 
+    function deleteThread(event){
+        event.preventDefault()
+        axios.delete('/api/thread/deleteThread', {data: {
+            threadId: id}
+        })
+            .then((response) =>{
+                if(response.data.success){
+                    alert("Thread has been successfully deleted")
+                }
+                else{
+                    alert("There was an error deleting the thread")
+                }
+            })
+        navigate('/forum')
+    }
+
     const content = {
         color: "black",
         padding: "8px",
@@ -81,7 +102,10 @@ function Thread(){
     return(
         
     <div class="container"> 
+            {console.log("User Id is :", data.userId , "Google Id is: ",Number(User.googleId))}
             <h2 style={userName}>Posted by: {data.user}</h2>
+            <div onClick={deleteThread} className="comment-action" 
+                style={{visibility: data.userId ===  Number(User.googleId) ? "visible" : "hidden"}} >Delete</div>
             <h2 style={title}>{data.title}</h2>
             <p style={content}>{data.content}</p>
             <Comments CommentLists={CommentLists} refreshFunction={updateComment} deleteComment={deleteComment} editComment={editComment}/>

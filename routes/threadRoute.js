@@ -7,11 +7,11 @@ router.route('/createThread').post((req,res) =>{
     const title = req.body.title
     const content = req.body.content
     const user = req.body.user
-    const userID = req.body.userID
+    const userId = req.body.userId
     const newThread = new Thread({
         title,
         content,
-        userID,
+        userId,
         user
     })
     newThread.save()
@@ -35,6 +35,16 @@ router.route('/:id').get((req,res) =>{
             res.status(200).json(thread)
         }
     })
+})
+
+router.route('/deleteThread').delete((req,res) =>{
+    Thread.deleteOne({_id: req.body.threadId})
+        .exec((err) =>{
+            if(err){
+                return res.json({success:false,err})
+            }
+            res.status(200).json({success:true})
+        })
 })
 
 module.exports = router

@@ -18,6 +18,10 @@ const threadSchema = new Schema({
     user:{
         type: String,
         require: true
+    },
+    userId:{
+        type: Number,
+        require: true
     }
 
 },{timestamps: true })

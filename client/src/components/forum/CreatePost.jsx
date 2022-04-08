@@ -28,7 +28,8 @@ function CreatePost(){
             title: input.title,
             content: input.content,
             userID: User.googleId,
-            user: User.name
+            user: User.name,
+            userId: User.googleId
         }
         axios.post('/api/thread/createThread', newThread)
         navigate('/forum')
