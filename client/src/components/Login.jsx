@@ -40,6 +40,15 @@ function Login(){
     
     return (
         <div className="login">
+            <GoogleLogout
+                    clientId={clientId}
+                    render={renderProps => (
+                        <button onClick={renderProps.onClick} style={{borderRadius:'.3rem',boxShadow:'none'}}></button>
+                    )}
+                    buttonText="Logout"
+                    onLogoutSuccess={onLogoutSuccess}
+                >
+                </GoogleLogout>
             <div class="container">
                  <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height: '20vh'}}>
                 <h1 class="font-weight-light">Profile</h1>
