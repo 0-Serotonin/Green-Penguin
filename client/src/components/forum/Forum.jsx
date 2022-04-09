@@ -1,12 +1,14 @@
-import React, {useState, useEffect } from "react"; //To handle change, need to track the state of the input
+import React, {useState, useEffect, useContext } from "react"; //To handle change, need to track the state of the input
 import {Link} from "react-router-dom";
 import Pagination from './Pagination';
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
+import {UserContext} from "../UserContext"
 
 function Forum(){
-
+    const {User} = useContext(UserContext)
+    console.log("User details: ", User)
     const [threads, setThreads] = useState([{
         title:'',
         content:''
@@ -41,7 +43,7 @@ function Forum(){
         </div>
 
         <div class="col-lg-2">
-        <NavLink className="nav-link" to="/createPost">
+        <NavLink className="nav-link" to="/createPost" style={{visibility: User === '' ? "hidden" : "visible"}}>
             <Button>CREATE A POST</Button>
         </NavLink>
         {/* <Link to="/createPost" className="btn btn-primary">Create Post</Link> */}
