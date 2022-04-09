@@ -7,62 +7,62 @@ import axios from "axios";
 import {UserContext} from "../UserContext"
 
 function Forum(){
-    const {User} = useContext(UserContext)
-    console.log("User details: ", User)
-    const [threads, setThreads] = useState([{
-        title:'',
-        content:''
-    }])
+  const {User} = useContext(UserContext) 
+  console.log("User details: ", User)
+  const [threads, setThreads] = useState([{
+      title:'',
+      content:''
+  }])
 
-    const[pageNumber,setPageNumber] = useState(1)
-    const[postPerPage] = useState(10)
+  const[pageNumber,setPageNumber] = useState(1)
+  const[postPerPage] = useState(10)
 
-    useEffect(() =>{
-        axios.get('/api/thread/getThread')
-            .then((posts) => setThreads(posts.data))
-            .catch((err) => console.log(err));
-    }, [])
-    
-    const indexOfLastPost = pageNumber * postPerPage
-    const indexOfFirstPost = indexOfLastPost - postPerPage
-    const currentPosts = threads.slice(indexOfFirstPost, indexOfLastPost)
-    
-    function paginate(pageNumber){
-        setPageNumber(pageNumber)
-    }
+  useEffect(() =>{
+      axios.get('/api/thread/getThread')
+          .then((posts) => setThreads(posts.data))
+          .catch((err) => console.log(err));
+  }, [])
+  
+  const indexOfLastPost = pageNumber * postPerPage
+  const indexOfFirstPost = indexOfLastPost - postPerPage
+  const currentPosts = threads.slice(indexOfFirstPost, indexOfLastPost)
+  
+  function paginate(pageNumber){
+      setPageNumber(pageNumber)
+  }
 
-    return(
-        <div class="container">
-        <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height: '20vh'}}>
-        <h1 class="font-weight-light">Forum</h1>
-        </div>
-
-        <div class ="row">
-        <div class="col-lg-10">
-        <h3 style ={{fontFamily:'Playfield display',fontWeight:'bold', height:'10vh'}}> Current Threads</h3>
-        </div>
-
-        <div class="col-lg-2">
-        <NavLink className="nav-link" to="/createPost" style={{visibility: User === '' ? "hidden" : "visible"}}>
-            <Button>CREATE A POST</Button>
-        </NavLink>
-        {/* <Link to="/createPost" className="btn btn-primary">Create Post</Link> */}
-        </div>
-
-        <div class="container">
-        {currentPosts.map((thread) =>(
-
-            <div key={String(thread._id)}>
-              <h4 style ={{fontFamily:'Arial',fontWeight:'bold'}}> 
-                <Link to={`/thread/${String(thread._id)}`}>{thread.title}</Link>
-              </h4>
-                <p>{thread.content}</p>
-            </div>
-        ))}
-        <Pagination postPerPage={postPerPage} totalPosts={threads.length} paginate={paginate}/> 
-        </div>
-        </div>
+  return(
+      <div class="container">
+      <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height: '20vh'}}>
+      <h1 class="font-weight-light">Forum</h1>
       </div>
+
+      <div class ="row">
+      <div class="col-lg-10">
+      <h3 style ={{fontFamily:'Playfield display',fontWeight:'bold', height:'10vh'}}> Current Threads</h3>
+      </div>
+
+      <div class="col-lg-2">
+      <NavLink className="nav-link" to="/createPost" style={{visibility: User === '' ? "hidden" : "visible"}}>
+          <Button>CREATE A POST</Button>
+      </NavLink>
+      {/* <Link to="/createPost" className="btn btn-primary">Create Post</Link> */}
+      </div>
+
+      <div class="container">
+      {currentPosts.map((thread) =>(
+
+          <div key={String(thread._id)}>
+            <h4 style ={{fontFamily:'Arial',fontWeight:'bold'}}> 
+              <Link to={`/thread/${String(thread._id)}`}>{thread.title}</Link>
+            </h4>
+              <p>{thread.content}</p>
+          </div>
+      ))}
+      <Pagination postPerPage={postPerPage} totalPosts={threads.length} paginate={paginate}/> 
+      </div>
+      </div>
+    </div>
     )
 
 }

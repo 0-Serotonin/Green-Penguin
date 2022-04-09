@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import Profile from './forum/Profile';
 import NotLoggedIn from './forum/NotLoggedIn';
@@ -16,6 +16,7 @@ function Login(){
     const[photoUrl,setPhoto] = useState('');
     const[email,setEmail] = useState('');
     
+
     const onLoginSuccess = (res) => {
         console.log('[Login Success] currentUser:', res.profileObj);
         setShowLoginButton(false);
@@ -33,6 +34,7 @@ function Login(){
         alert('Logout made successfully!');
         setShowLoginButton(true);
         setShowLogoutButton(false);
+        setUser('');
         setName('');
         setPhoto('');
         setEmail('');
