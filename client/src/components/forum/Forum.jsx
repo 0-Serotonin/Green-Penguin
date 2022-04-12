@@ -14,7 +14,7 @@ function Forum(){
   }])
 
   const[pageNumber,setPageNumber] = useState(1)
-  const[postPerPage] = useState(10)
+  const[postPerPage] = useState(6)
 
   useEffect(() =>{
       axios.get('/api/thread/getThread')
