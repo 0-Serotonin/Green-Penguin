@@ -107,14 +107,15 @@ function SingleComment(props) {
 
     const userName = {
         color: "black",
-        fontSize:"15px"
+        fontSize:"15px",
+        fontStyle: "italic"
     }
 
     return (
         
         <div>
-            <h3 style={userName}>{props.comment.user}: </h3>
-            <h2>{props.comment.comment}</h2>
+            <h3 style={userName}>{props.comment.user} commented: </h3>
+            <h5>{props.comment.comment}</h5>
             <div className='comment-actions'>
                         <div onClick={enableReply} className="comment-action">Reply</div>
                         <div onClick={editReply} className="comment-action" 
