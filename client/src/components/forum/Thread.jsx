@@ -106,9 +106,6 @@ function Thread(){
         
     <div class="container"> 
 
-            <div onClick={deleteThread} className="comment-action" 
-                style={{visibility: data.userId ===  Number(User.googleId) ? "visible" : "hidden"}} >Delete</div>
-
             <h2 style={title}>{data.title}</h2>
             <p style={content}>{data.content}</p>
             <h2 style={userName}>Posted by: {data.user}</h2>
