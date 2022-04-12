@@ -47,4 +47,17 @@ router.route('/deleteThread').delete((req,res) =>{
         })
 })
 
+router.route('/:googleId').get((req,res) =>{
+    const googleId = req.body.googleId
+    Thread.find({userId: googleId})
+        .then(thread => res.status(200).json({success:true,thread}))
+        .catch(err => console.log(err))
+})
+
+router.route('/deleteAllThread').delete((req,res) =>{
+    Thread.deleteMany({}, (req,res) =>{
+        console.log("successly deleted")
+    })
+})
+
 module.exports = router

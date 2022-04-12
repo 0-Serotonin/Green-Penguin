@@ -76,6 +76,10 @@ router.route('/updateComment').post((req,res) =>{
         })
 })
 
-
+router.route('/deleteAllComment').delete((req,res) =>{
+    Comment.deleteMany({}, (req,res) =>{
+        console.log("successly deleted")
+    })
+})
 
 module.exports = router
