@@ -1,12 +1,13 @@
 import React, {useState, useEffect, useContext } from "react"; //To handle change, need to track the state of the input
 import {Link} from "react-router-dom";
-import Pagination from './Pagination';
+import Pagination from './forum/Pagination';
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
-import {UserContext} from "../UserContext"
+import {UserContext} from "./UserContext"
+import Profile from "./forum/Profile";
 
-function Forum(){
+function MyPosts(){
   const {User} = useContext(UserContext) 
   const [threads, setThreads] = useState([{
       title:'',
@@ -15,11 +16,12 @@ function Forum(){
 
   const[pageNumber,setPageNumber] = useState(1)
   const[postPerPage] = useState(10)
+  const googleId = Number(User.googleId)
 
   useEffect(() =>{
-      axios.get('/api/thread/getThread')
-          .then((posts) => setThreads(posts.data))
-          .catch((err) => console.log(err));
+    axios.get(`/api/thread/user/${googleId}`)
+        .then((posts) => setThreads(posts.data))
+        .catch((err) => console.log(err));
   }, [])
   
   const indexOfLastPost = pageNumber * postPerPage
@@ -33,21 +35,11 @@ function Forum(){
   return(
       <div class="container">
       <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height: '20vh'}}>
-      <h1 class="font-weight-light">Forum</h1>
+      <h1 class="font-weight-light">My Posts</h1>
       </div>
 
       <div class ="row">
-      <div class="col-lg-10">
-      <h3 style ={{fontFamily:'Playfield display',fontWeight:'bold', height:'10vh'}}> Current Threads</h3>
-      </div>
-
-      <div class="col-lg-2">
-      <NavLink className="nav-link" to="/createPost" style={{visibility: User === '' ? "hidden" : "visible"}}>
-          <Button>CREATE A POST</Button>
-      </NavLink>
-      {/* <Link to="/createPost" className="btn btn-primary">Create Post</Link> */}
-      </div>
-
+        
       <div class="container">
       {currentPosts.map((thread) =>(
 
@@ -77,4 +69,4 @@ const Button = styled.button`
   background-repeat: no-repeat;
   background-position: 8px 8px;
 `;
-export default Forum;
+export default MyPosts;

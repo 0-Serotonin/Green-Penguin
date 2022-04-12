@@ -18,7 +18,6 @@ router.route('/createThread').post((req,res) =>{
 })
 
 router.get('/getThread', (req,res) =>{
-    console.log('Finding threads')
     Thread.find()
         .then(foundThread => res.json(foundThread))
         .catch(err => console.log(err));
@@ -45,6 +44,19 @@ router.route('/deleteThread').delete((req,res) =>{
             }
             res.status(200).json({success:true})
         })
+})
+
+router.route('/user/:googleId').get((req,res) =>{
+    const googleId = req.params.googleId
+    Thread.find({userId: googleId})
+        .then(thread => res.json(thread))
+        .catch(err => console.log(err))
+})
+
+router.route('/deleteAllThread').delete((req,res) =>{
+    Thread.deleteMany({}, (req,res) =>{
+        console.log("successly deleted")
+    })
 })
 
 module.exports = router

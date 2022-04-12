@@ -11,7 +11,7 @@ import {
   // Posts,
   // Post,
   Profile,
-  Account,
+  MyPosts,
   Login,
   NotLoggedIn,
   Filter,
@@ -45,7 +45,7 @@ function AppRouter(){
                 <Route className path="/start" element={<Filter />} />
                 <Route className path="/start2" element={<Filter2 />} />
                 <Route className path="/profile" element={<Profile />} />
-                <Route className path="/account" element={<Account />} />
+                <Route className path="/myposts" element={<MyPosts />} />
                 
                 <Route className path="/login" element={<Login />} />
                 <Route className path="/forum" element={<Forum />}/>
