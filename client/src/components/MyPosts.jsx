@@ -39,10 +39,7 @@ function MyPosts(){
       </div>
 
       <div class ="row">
-      <div class="col-lg-10">
-      <h3 style ={{fontFamily:'Playfield display',fontWeight:'bold', height:'10vh'}}> My Threads</h3>
-      </div>
-
+        
       <div class="container">
       {currentPosts.map((thread) =>(
 
