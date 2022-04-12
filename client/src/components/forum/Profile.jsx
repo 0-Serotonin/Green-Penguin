@@ -20,11 +20,11 @@ function Profile(props) {
         
             <h2 class="font-weight-bold">{props.name}</h2>
             <h4 class="font-weight-light">{props.email}</h4>
-            <NavLink className="nav-link" to="/account">
+            {/* <NavLink className="nav-link" to="/account">
                   <Button>EDIT ACCOUNT</Button>
-            </NavLink>
+            </NavLink> */}
             <div class="col-lg-0">
-              <NavLink className="nav-link" to="/account">
+              <NavLink className="nav-link" to="/myposts">
               <img
               src="https://pic.onlinewebfonts.com/svg/img_89209.png"
               width="20" 
@@ -33,16 +33,6 @@ function Profile(props) {
             />
                     <Button2>My Posts</Button2>
               </NavLink>
-              <NavLink className="nav-link" to="/account">
-              <img
-              src="https://pic.onlinewebfonts.com/svg/img_89209.png"
-              width="20" 
-              height="20"
-              alt=""
-            />
-                    <Button2>Saved Items</Button2>
-              </NavLink>
-
               
           </div>
           
