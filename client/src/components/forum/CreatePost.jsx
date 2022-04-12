@@ -45,8 +45,9 @@ function CreatePost(){
                 <div class="form-group">
                     <textarea onChange={handleChange} name="content" value={input.content} autoComplete="off" className="comment-form-textarea" placeholder="Insert content here (Limit to 500 characters)"></textarea>
                 </div>
-                <button  onClick={handleClick} className="btn btn-lg btn-info" disabled={isTextareaDisabled}>Create Thread</button>
+                <button  onClick={handleClick} className="btn btn-lg btn-dark" disabled={isTextareaDisabled}>Create Thread</button>
             </form>
+            <div className style={{height: "70vh"}}></div>
         </div>
     )
 

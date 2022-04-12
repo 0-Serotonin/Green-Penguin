@@ -53,16 +53,17 @@ function Comments(props) {
         <div>
             <br/>
             {/* Root Comment Form */}
+            <p className='thread-form-title'> Comments Section </p>
             <form>
                 <div class="form-group">
                     <input onChange={handleChange} name="comment" value={input.comment} autoComplete="off" 
                         className="comment-form-textarea" placeholder="Penny for your thoughts?"/>
                 </div> 
                 <button style={mystyle} onClick={handleClick} className="comment-form-button"
-                     disabled={isTextareaDisabled}>Comment</button>
+                     disabled={isTextareaDisabled}>Submit</button>
             </form>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '3vh' }}></div>
-            <p className='thread-form-title'> Comments </p>
+            
+            <div style={{ height:'20px'}}></div>
             {props.CommentLists && props.CommentLists.map((comment,index) => (
             (!comment.responseTo && 
                 <React.Fragment>
@@ -74,7 +75,7 @@ function Comments(props) {
                     </div>
                 </React.Fragment>
             )))}
-
+            
         </div>
     )
 }
