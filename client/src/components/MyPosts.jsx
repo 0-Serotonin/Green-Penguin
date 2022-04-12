@@ -9,7 +9,6 @@ import Profile from "./forum/Profile";
 
 function MyPosts(){
   const {User} = useContext(UserContext) 
-  console.log("User details: ", User)
   const [threads, setThreads] = useState([{
       title:'',
       content:''
@@ -17,11 +16,12 @@ function MyPosts(){
 
   const[pageNumber,setPageNumber] = useState(1)
   const[postPerPage] = useState(10)
+  const googleId = Number(User.googleId)
 
   useEffect(() =>{
-      axios.get('/api/thread/getThread')
-          .then((posts) => setThreads(posts.data))
-          .catch((err) => console.log(err));
+    axios.get(`/api/thread/user/${googleId}`)
+        .then((posts) => setThreads(posts.data))
+        .catch((err) => console.log(err));
   }, [])
   
   const indexOfLastPost = pageNumber * postPerPage

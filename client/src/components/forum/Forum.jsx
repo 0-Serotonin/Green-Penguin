@@ -8,7 +8,6 @@ import {UserContext} from "../UserContext"
 
 function Forum(){
   const {User} = useContext(UserContext) 
-  console.log("User details: ", User)
   const [threads, setThreads] = useState([{
       title:'',
       content:''

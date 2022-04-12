@@ -102,7 +102,6 @@ function Thread(){
     return(
         
     <div class="container"> 
-            {console.log("User Id is :", data.userId , "Google Id is: ",Number(User.googleId))}
             <h2 style={userName}>Posted by: {data.user}</h2>
             <div onClick={deleteThread} className="comment-action" 
                 style={{visibility: data.userId ===  Number(User.googleId) ? "visible" : "hidden"}} >Delete</div>

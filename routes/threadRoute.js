@@ -18,7 +18,6 @@ router.route('/createThread').post((req,res) =>{
 })
 
 router.get('/getThread', (req,res) =>{
-    console.log('Finding threads')
     Thread.find()
         .then(foundThread => res.json(foundThread))
         .catch(err => console.log(err));
@@ -47,10 +46,10 @@ router.route('/deleteThread').delete((req,res) =>{
         })
 })
 
-router.route('/:googleId').get((req,res) =>{
-    const googleId = req.body.googleId
+router.route('/user/:googleId').get((req,res) =>{
+    const googleId = req.params.googleId
     Thread.find({userId: googleId})
-        .then(thread => res.status(200).json({success:true,thread}))
+        .then(thread => res.json(thread))
         .catch(err => console.log(err))
 })
 
