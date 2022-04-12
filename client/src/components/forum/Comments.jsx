@@ -11,7 +11,7 @@ function Comments(props) {
     const [input,setInput] = useState({
     comment:''
     })
-    const isTextareaDisabled = input.comment.length===0
+    const isTextareaDisabled = (input.comment.length===0 || User === '')
     function handleChange(event){
         const {name,value} = event.target
         setInput((prevInput) =>{

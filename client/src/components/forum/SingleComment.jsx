@@ -12,7 +12,7 @@ function SingleComment(props) {
     const [CommentValue, setCommentValue] = useState({
         content:'',
     })
-    const isTextareaDisabled = CommentValue.content.length===0
+    const isTextareaDisabled = (CommentValue.content.length===0 || User === '')
 
     function handleClick(event){
         console.log('Comment Clicked')
