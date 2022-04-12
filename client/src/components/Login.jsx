@@ -4,6 +4,7 @@ import Profile from './forum/Profile';
 import NotLoggedIn from './forum/NotLoggedIn';
 //import { refreshTokenSetup } from '../utils/refreshTokenSetup';
 import { UserContext } from './UserContext';
+import styled from "styled-components";
 
 const clientId = "932974881889-v6t381i4seng1vl0avklaf70li7ok1pg.apps.googleusercontent.com";
 
@@ -39,13 +40,20 @@ function Login(){
         setPhoto('');
         setEmail('');
     };
-    
+    const Button = styled.button`
+    background-color: white;
+    color: white;
+    border-radius: 0px;
+    border-width: 0px;
+    margin: 10px 0px;
+    cursor: pointer;
+    `;
     return (
         <div className="login">
             <GoogleLogout
                     clientId={clientId}
                     render={renderProps => (
-                        <button onClick={renderProps.onClick} style={{borderRadius:'.3rem',boxShadow:'none'}}></button>
+                        <Button onClick={renderProps.onClick} style={{borderRadius:'.3rem',boxShadow:'none'}}></Button>
                     )}
                     buttonText="Logout"
                     onLogoutSuccess={onLogoutSuccess}
