@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, {useState, useEffect, useContext} from 'react'
 import {useParams} from 'react-router-dom'
-import Comments from './Comments'
+import CommentsManager from './CommentsManager'
 import {UserContext} from '../UserContext'
 import {useNavigate} from "react-router-dom";
 
@@ -110,7 +110,7 @@ function Thread(){
             <p style={content}>{data.content}</p>
             <h2 style={userName}>Posted by: {data.user}</h2>
             <div onClick={deleteThread} className="comment-action" style={{visibility: data.userId ===  Number(User.googleId) ? "visible" : "hidden"}} >Delete</div>
-            <Comments CommentLists={CommentLists} refreshFunction={updateComment} deleteComment={deleteComment} editComment={editComment}/>
+            <CommentsManager CommentLists={CommentLists} refreshFunction={updateComment} deleteComment={deleteComment} editComment={editComment}/>
     </div>
     )
 }
