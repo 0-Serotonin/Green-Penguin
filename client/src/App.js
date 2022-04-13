@@ -8,14 +8,11 @@ import {
   Browse,
   Contact,
   Forum,
-  // Posts,
-  // Post,
   Profile,
   MyPosts,
   Login,
   NotLoggedIn,
   Filter,
-  Filter2,
   Ewaste,
   LightingWaste,
   CreatePost,
@@ -43,7 +40,6 @@ function AppRouter(){
                 <Route className path="/browse" element={<Browse />} />
                 <Route className path="/contact" element={<Contact />} />
                 <Route className path="/start" element={<Filter />} />
-                <Route className path="/start2" element={<Filter2 />} />
                 <Route className path="/profile" element={<Profile />} />
                 <Route className path="/myposts" element={<MyPosts />} />
                 

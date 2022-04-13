@@ -14,10 +14,4 @@ function Footer() {
   );
 }
 
-// const Footer = () => (
-//   <div className="footer">
-//     <p>Copyright &copy; Green Pirates Inc 2022</p>
-//   </div>
-// );
-
 export default Footer;
