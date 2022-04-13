@@ -20,7 +20,7 @@ function Contact() {
             &#128222; +65 8888 8888
             </ul>
             <ul>
-            &#128231; GreenPirates@gmail.com
+            &#128231; GreenPirates@SoftwarePirates.com
             </ul>
             <ul>
             &#9978;Yunnan Corner <br></br>
