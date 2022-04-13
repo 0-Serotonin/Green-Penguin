@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class BrowseFilter extends Component{
+export default class BrowseManager extends Component{
   render(){
     const {name, handleChange, checked, title } = this.props;
 

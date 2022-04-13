@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { articleList } from "./articleList";
-import BrowseFilter from "./BrowseFilter";
+import BrowseManager from "./BrowseManager";
 import RenderArticles from "./RenderArticles";
 
 export default class Browse extends Component{
@@ -50,28 +49,28 @@ export default class Browse extends Component{
         
             <div class="col-lg-3">
               <h4>Filter</h4>
-              <BrowseFilter 
+              <BrowseManager 
               handleChange = {this.handleChange}
               name = "ewaste"
               checked = {this.state.categories.ewaste}
               title = " E-waste"
               />
 
-              <BrowseFilter 
+              <BrowseManager
               handleChange = {this.handleChange}
               name = "lightingwaste"
               checked = {this.state.categories.lightingwaste}
               title = " Lighting Waste"
               />
 
-              <BrowseFilter 
+              <BrowseManager 
               handleChange = {this.handleChange}
               name = "cashtrash"
               checked = {this.state.categories.cashtrash}
               title = " Cash for Trash"
               />
 
-              <BrowseFilter 
+              <BrowseManager
               handleChange = {this.handleChange}
               name = "oldproducts"
               checked = {this.state.categories.oldproducts}
