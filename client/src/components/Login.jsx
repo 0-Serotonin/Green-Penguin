@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import Profile from './forum/Profile';
 import NotLoggedIn from './forum/NotLoggedIn';
-//import { refreshTokenSetup } from '../utils/refreshTokenSetup';
 import { UserContext } from './UserContext';
 import styled from "styled-components";
 
@@ -13,19 +12,12 @@ function Login(){
     const {User, setUser} = useContext(UserContext);
     const[showLoginButton, setShowLoginButton]= useState(true);
     const[showLogoutButton, setShowLogoutButton] = useState(false);
-    const[name,setName] = useState('');
-    const[photoUrl,setPhoto] = useState('');
-    const[email,setEmail] = useState('');
-    
 
     const onLoginSuccess = (res) => {
         console.log('[Login Success] currentUser:', res.profileObj);
         setShowLoginButton(false);
         setShowLogoutButton(true);
         setUser(res.profileObj);
-        setName(res.profileObj.name);
-        setPhoto(res.profileObj.imageUrl);
-        setEmail(res.profileObj.email);
     };
 
     const onLoginFailure = (res) => {
@@ -36,9 +28,6 @@ function Login(){
         setShowLoginButton(true);
         setShowLogoutButton(false);
         setUser('');
-        setName('');
-        setPhoto('');
-        setEmail('');
     };
     const Button = styled.button`
     background-color: white;
@@ -83,7 +72,7 @@ function Login(){
                 : null
             }
             { showLogoutButton ?
-                <Profile name={name} photo={photoUrl} email={email} /> :null
+                <Profile/> :null
             }
             { showLogoutButton ?
                 <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height:'20vh'}}>

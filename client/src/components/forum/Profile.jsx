@@ -1,10 +1,10 @@
-import React from "react";
-import Login from '../Login';
+import React, {useContext} from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import {UserContext} from '../UserContext'
 
-
-function Profile(props) {
+function Profile() {
+  const {User} = useContext(UserContext)
   return (
     <div className="about">
       <div class="container">
@@ -12,14 +12,14 @@ function Profile(props) {
           <div class="col-lg-2">
             <img
               class="img-fluid rounded mb-4 mb-lg-0"
-              src={props.photo}
+              src={User.imageUrl}
               alt=""
             />
           </div>
           <div class="col-lg-6">
         
-            <h2 class="font-weight-bold">{props.name}</h2>
-            <h4 class="font-weight-light">{props.email}</h4>
+            <h2 class="font-weight-bold">{User.name}</h2>
+            <h4 class="font-weight-light">{User.email}</h4>
             {/* <NavLink className="nav-link" to="/account">
                   <Button>EDIT ACCOUNT</Button>
             </NavLink> */}
