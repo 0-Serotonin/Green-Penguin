@@ -8,15 +8,15 @@ function MapManager() {
             <div class = "container">
 
                   <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height: '10vh'}}>
-                    <NavLink className="nav-link" to="/map2ndhand" ><ul><Button>Recycling old products</Button></ul></NavLink>
+                    <NavLink className="nav-link" to="/map" state={{url:"https://geo.data.gov.sg/secondhandcollecn/2017/11/30/kml/secondhandcollecn.kml"}}><ul><Button>Recycling old products</Button></ul></NavLink>
                   </div> 
 
                   <div style={{display: 'flex',justifyContent:'center', alignItems:'center', height: '10vh'}}>
-                    <NavLink className="nav-link" to="/mapewaste" ><ul><Button>Recycling e-waste</Button></ul></NavLink>
+                    <NavLink className="nav-link" to="/map" state={{url:"https://geo.data.gov.sg/ewaste/2021/09/24/kml/ewaste.kml"}} ><ul><Button>Recycling e-waste</Button></ul></NavLink>
                   </div>
 
                   <div style={{display: 'flex',justifyContent:'center', alignItems:'center', height: '10vh'}}>
-                    <NavLink className="nav-link" to="/maplwaste" ><ul><Button>Recycling lighting waste</Button></ul></NavLink>
+                    <NavLink className="nav-link" to="/map" state={{url:"https://geo.data.gov.sg/lighting/2019/10/01/kml/lighting.kml"}} ><ul><Button>Recycling lighting waste</Button></ul></NavLink>
                   </div> 
                   
             </div>

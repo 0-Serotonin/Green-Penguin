@@ -22,6 +22,7 @@ import {
   MapEwaste,
   MapLwaste,
   Map2ndHand,
+  Map,
 } from "./components";
 import {UserContext} from './components/UserContext'
 
@@ -55,9 +56,7 @@ function AppRouter(){
                 <Route className path="/lightingwaste" element={<LightingWaste/>} />
                 <Route className path="/cash" element={<Cash/>} />
                 <Route className path="/OldProducts" element={<OldProducts/>} />
-                <Route className path="/mapewaste" element={<MapEwaste />} />
-                <Route className path="/maplwaste" element={<MapLwaste />} />
-                <Route className path="/map2ndhand" element={<Map2ndHand />} />
+                <Route className path="/map" element={<Map />} />
             </Routes>
             </UserContext.Provider>
             <Footer />

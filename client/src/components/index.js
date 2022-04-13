@@ -15,6 +15,4 @@ export { default as Cash} from "./activity/Cash";
 export { default as OldProducts} from "./activity/OldProducts";
 export { default as CreatePost } from "./forum/CreatePost";
 export { default as Thread } from "./forum/Thread";
-export { default as MapEwaste } from "./map/MapEwaste";
-export { default as MapLwaste } from "./map/MapLwaste";
-export { default as Map2ndHand } from "./map/Map2ndHand";
+export { default as Map } from "./map/Map";

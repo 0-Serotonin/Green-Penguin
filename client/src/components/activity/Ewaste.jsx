@@ -29,7 +29,7 @@ function Ewaste() {
         </div>
         </div>
         <div class="col-lg-6">
-            <NavLink className="nav-link" to="/mapewaste">
+            <NavLink className="nav-link" to="/map" state={{url:"https://geo.data.gov.sg/ewaste/2021/09/24/kml/ewaste.kml"}} >
                   <Button>FIND A LOCATION NEAR ME</Button>
             </NavLink>
             <ul>

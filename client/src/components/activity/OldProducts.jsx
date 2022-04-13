@@ -29,7 +29,7 @@ function OldProducts() {
         </div>
         </div>
         <div class="col-lg-6">
-            <NavLink className="nav-link" to="/map2ndhand">
+            <NavLink className="nav-link" to="/map" state={{url:"https://geo.data.gov.sg/secondhandcollecn/2017/11/30/kml/secondhandcollecn.kml"}}>
                   <Button>FIND A LOCATION NEAR ME</Button>
             </NavLink>
             <ul>

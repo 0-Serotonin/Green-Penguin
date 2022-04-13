@@ -4,6 +4,7 @@ import mapStyles from "./mapStyles";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
 import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from "@reach/combobox";
 import "@reach/combobox/styles.css";
+import { useLocation } from "react-router-dom";
 
 
 const libraries = ["places"];
@@ -26,7 +27,7 @@ var yourLatitude;
 var yourLongitude;
 
 
-export default function Map() {
+export default function Map(props) {
     const [selectedPoint, setSelectedPoint] = useState(null);
 
     const { isLoaded, loadError } = useLoadScript({
@@ -45,7 +46,8 @@ export default function Map() {
     }, []);
 
     const [markers, setMarkers] = React.useState([]);
-
+    const location = useLocation();
+    const { url } = location.state;
 
     if (loadError) return "Error loading Maps";
     if (!isLoaded) return "Loading Maps";
@@ -76,7 +78,7 @@ export default function Map() {
             ))}
 
             <KmlLayer
-                url="https://geo.data.gov.sg/ewaste/2021/09/24/kml/ewaste.kml"
+                url={url}
                 options={{ preserveViewport: true }}
             />
 
