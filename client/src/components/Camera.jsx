@@ -10,7 +10,7 @@ function Camera() {
       <div class ="row">
 
       <div class="col-lg-12">
-      <h3 style ={{fontFamily:'Playfield display',fontWeight:'bold', height:'10vh'}}> Find out where to recycle your items  qwery</h3>
+      <h3 style ={{fontFamily:'Playfield display',fontWeight:'bold', height:'10vh'}}>Find out where to recycle your items</h3>
       </div>
 
       <div class="col-lg-2">
@@ -21,7 +21,7 @@ function Camera() {
       </div>
       </div>
       </div>
-      
+
     )
 }
 
