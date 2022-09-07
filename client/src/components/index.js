@@ -16,3 +16,4 @@ export { default as OldProducts} from "./activity/OldProducts";
 export { default as CreatePost } from "./forum/CreatePost";
 export { default as Thread } from "./forum/Thread";
 export { default as Map } from "./map/Map";
+export { default as Camera } from "./Camera";

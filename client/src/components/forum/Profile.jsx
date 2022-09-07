@@ -24,7 +24,8 @@ function Profile() {
             <div class="col-lg-0">
               <NavLink className="nav-link" to="/myposts">
               <img
-              src="https://pic.onlinewebfonts.com/svg/img_89209.png"
+              src="https://pic.onlinewebfonts.com/svg/img_8920
+              9.png"
               width="20" 
               height="20"
               alt="" />

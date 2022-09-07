@@ -52,7 +52,6 @@ function Forum(){
       <div class="col-lg-2">
         <Button onClick = {redirectUser}>CREATE A POST</Button>
       </div>
-
       <div class="container">
       {currentPosts.map((thread) =>(
 

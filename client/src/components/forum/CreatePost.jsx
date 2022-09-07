@@ -35,6 +35,8 @@ function CreatePost(){
         navigate('/forum')
     }
 
+
+
     return(
         <div className="container">
             <h1 className="thread-form-title">New Post</h1>
@@ -47,6 +49,7 @@ function CreatePost(){
                 </div>
                 <button  onClick={handleClick} className="btn btn-lg btn-dark" disabled={isTextareaDisabled}>Create Thread</button>
             </form>
+            
             <div className style={{height: "70vh"}}></div>
         </div>
     )

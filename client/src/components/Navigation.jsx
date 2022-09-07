@@ -34,11 +34,17 @@ function Navigation() {
                   Contact
                 </NavLink>
               </li>
+              <li className="nav-item">          
+                <NavLink className="nav-link" to="/camera">
+                  Camera
+                </NavLink>
+              </li>
               <div>
                 <NavLink className="nav-link" to="/login">
                   Profile
                 </NavLink>
               </div>
+
             </ul>
     
           </div>
