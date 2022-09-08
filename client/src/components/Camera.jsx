@@ -16,24 +16,22 @@ function Camera() {
 
   let classesDir = {
     1: {
-        name: 'Class name 1',
-        id: 1,
+      name: "Class name 1",
+      id: 1,
     },
     2: {
-        name: 'Class name 2',
-        id: 2,
-    }
-    ,
+      name: "Class name 2",
+      id: 2,
+    },
     3: {
-        name: 'Class name 3',
-        id: 3,
-    }
-    ,
+      name: "Class name 3",
+      id: 3,
+    },
     4: {
-        name: 'Class name 4',
-        id: 4,
+      name: "Class name 4",
+      id: 4,
     }
-}
+  };
 
   const loadModel = async () => {
     setIsModelLoading(true);
@@ -71,19 +69,20 @@ function Camera() {
       .expandDims();
     const result = await model.executeAsync(tensorImg);
 
-    // result.forEach((t) => t.print()); // log out the data of all tensors
-    // const data = [];
-    // for (let i = 0; i < result.length; i++) data.push(result[i].dataSync()); // get the data
+    result.forEach((t) => t.print()); // log out the data of all tensors
+    const data = [];
+    for (let i = 0; i < result.length; i++) data.push(result[i].dataSync()); // get the data
 
-    const boxes = result[0].dataSync()
-    const scores = result[1].arraySync()
-    const classes = result[2].dataSync()
-    const threshold = 0
-    const imageHeight = 640
-    const imageWidth = 640
-    const detectionObjects = []
+    const boxes = result[0].dataSync();
+    const scores = result[1].arraySync();
+    const classes = result[2].dataSync();
+    
+    const threshold = 0;
+    const imageHeight = 640;
+    const imageWidth = 640;
+    const detectionObjects = [];
     scores.forEach((score, i) => {
-      console.log(classesDir[classes[i]].name)
+      console.log(classesDir[classes[i]].name);
       if (score > threshold) {
         const bbox = [];
         const minY = boxes[i * 4] * imageHeight;
@@ -99,13 +98,12 @@ function Camera() {
           class: classes[i],
           label: classesDir[classes[i]].name,
           score: score.toFixed(4),
-          bbox: bbox
-        })
+          bbox: bbox,
+        });
       }
-    })
+    });
 
-    // console.log(detectionObjects)
-
+    console.log(detectionObjects)
 
     // setResults(result);
   };
