@@ -5,7 +5,7 @@ function Camera() {
     return (
     <div class="container">
       <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height: '20vh'}}>
-        <h1 class="font-weight-light">Item Classification</h1>
+        <h1 class="font-weight-light">Catergroy Classification</h1>
       </div>
       <div class ="row">
         <div class="col-lg-8">
