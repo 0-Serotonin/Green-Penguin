@@ -1,8 +1,25 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import * as tf from "@tensorflow/tfjs";
 import { loadGraphModel } from "@tensorflow/tfjs-converter";
+
+tf.setBackend("webgl");
+
+const threshold = 0.75;
+
+let classesDir = {
+  1: {
+      name: 'Kangaroo',
+      id: 1,
+  },
+  2: {
+      name: 'Other',
+      id: 2,
+  }
+}
+
 function Camera() {
   const [isModelLoading, setIsModelLoading] = useState(false);
   const [model, setModel] = useState(null);
@@ -14,30 +31,12 @@ function Camera() {
   const textInputRef = useRef();
   const fileInputRef = useRef();
 
-  let classesDir = {
-    1: {
-      name: "Class name 1",
-      id: 1,
-    },
-    2: {
-      name: "Class name 2",
-      id: 2,
-    },
-    3: {
-      name: "Class name 3",
-      id: 3,
-    },
-    4: {
-      name: "Class name 4",
-      id: 4,
-    }
-  };
 
   const loadModel = async () => {
     setIsModelLoading(true);
     try {
       const model = await loadGraphModel(
-        "https://raw.githubusercontent.com/jeslynlamxy/whack-model-storage/main/best_web_model/model.json"
+        "https://raw.githubusercontent.com/jeslynlamxy/whack-model-storage/main/model.json"
       );
       setModel(model);
       setIsModelLoading(false);
@@ -58,54 +57,50 @@ function Camera() {
   };
 
   const identify = async () => {
-    // textInputRef.current.value = "";
-    // const results = await model.classify(imageRef.current);
-    // setResults(results);
-
     const tensorImg = tf.browser
       .fromPixels(imageRef.current)
       .resizeNearestNeighbor([640, 640])
       .toFloat()
       .expandDims();
-    const result = await model.executeAsync(tensorImg);
+    const results = await model.executeAsync(tensorImg);
 
-    result.forEach((t) => t.print()); // log out the data of all tensors
-    const data = [];
-    for (let i = 0; i < result.length; i++) data.push(result[i].dataSync()); // get the data
+    const [boxes, scores, classes, valid_detections] = results;
+    const boxes_data = boxes.dataSync();
+    const scores_data = scores.dataSync();
+    const classes_data = classes.dataSync();
+    const valid_detections_data = valid_detections.dataSync()[0];
 
-    const boxes = result[0].dataSync();
-    const scores = result[1].arraySync();
-    const classes = result[2].dataSync();
-    
-    const threshold = 0;
-    const imageHeight = 640;
-    const imageWidth = 640;
-    const detectionObjects = [];
-    scores.forEach((score, i) => {
-      console.log(classesDir[classes[i]].name);
-      if (score > threshold) {
-        const bbox = [];
-        const minY = boxes[i * 4] * imageHeight;
-        const minX = boxes[i * 4 + 1] * imageWidth;
-        const maxY = boxes[i * 4 + 2] * imageHeight;
-        const maxX = boxes[i * 4 + 3] * imageWidth;
-        bbox[0] = minX;
-        bbox[1] = minY;
-        bbox[2] = maxX - minX;
-        bbox[3] = maxY - minY;
+    tf.dispose(results);
 
-        detectionObjects.push({
-          class: classes[i],
-          label: classesDir[classes[i]].name,
-          score: score.toFixed(4),
-          bbox: bbox,
-        });
-      }
-    });
+    var i;
+    for (i = 0; i < valid_detections_data; ++i) {
+      const klass = classes_data[i];
+      const score = scores_data[i].toFixed(2);
+      console.log(klass, score);
+    }
 
-    console.log(detectionObjects)
+    // // output is an array of tf.tensor.
+    // results.forEach((t) => t.print()); // log out the data of all tensors
+    // const data = [];
+    // for (let i = 0; i < results.length; i++) data.push(results[i].dataSync()); // get the data
 
-    // setResults(result);
+    // const scores = results[1].arraySync();
+    // const classes = results[2].dataSync();
+
+    // const threshold = 0.8;
+
+    // const detectionObjects = [];
+    // scores.forEach((score, i) => {
+    //   if (score[i] > threshold) {
+    //     detectionObjects.push({
+    //       class: classes[i],
+    //       label: classesDir[classes[i]].name,
+    //       score: score[i].toFixed(2),
+    //     });
+    //   }
+    // });
+
+    // setResults(detectionObjects);
   };
 
   const handleOnChange = (e) => {
@@ -128,16 +123,18 @@ function Camera() {
   }, [imageURL]);
 
   if (isModelLoading) {
-    return <div
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      height: "20vh",
-    }}
-  >
-    <h1 class="font-weight-light">Model Loading...</h1>
-  </div>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "20vh",
+        }}
+      >
+        <h1 class="font-weight-light">Model Loading...</h1>
+      </div>
+    );
   }
 
   return (
@@ -153,7 +150,7 @@ function Camera() {
         <h1 class="font-weight-light">Catergroy Classification</h1>
       </div>
       <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-5">
           <h3
             style={{
               fontFamily: "Playfield display",
@@ -164,15 +161,22 @@ function Camera() {
             Find out where to recycle your items
           </h3>
         </div>
+        <div class="col-lg-3">
+          <input
+            type="text"
+            placeholder="Paste Image URL"
+            ref={textInputRef}
+            onChange={handleOnChange}
+          />
+        </div>
         <div class="col-lg-2">
-          <Button onClick={null}>UPLOAD IMAGE</Button>
+          <Button onClick={triggerUpload}>UPLOAD IMAGE</Button>
         </div>
         <div class="col-lg-2">
           <Button onClick={null}>USE CAMERA</Button>
         </div>
       </div>
 
-      <h1 className="header">Image Identification</h1>
       <div className="inputHolder">
         <input
           type="file"
@@ -182,17 +186,8 @@ function Camera() {
           onChange={uploadImage}
           ref={fileInputRef}
         />
-        <button className="uploadImage" onClick={triggerUpload}>
-          Upload Image
-        </button>
-        <span className="or">OR</span>
-        <input
-          type="text"
-          placeholder="Paster image URL"
-          ref={textInputRef}
-          onChange={handleOnChange}
-        />
       </div>
+
       <div className="mainWrapper">
         <div className="mainContent">
           <div className="imageHolder">
@@ -205,28 +200,36 @@ function Camera() {
               />
             )}
           </div>
-          {results.length > 0 && (
-            <div className="resultsHolder">
-              {results.map((result, index) => {
-                return (
-                  <div className="result" key={result.className}>
-                    <span className="name">{result.className}</span>
-                    <span className="confidence">
-                      Confidence level: {(result.probability * 100).toFixed(2)}%{" "}
-                      {index === 0 && (
-                        <span className="bestGuess">Best Guess</span>
-                      )}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+
+          <div className="resultsHolder">
+            {results.map((result, index) => {
+              return (
+                <div className="result" key={index}>
+                  <span className="name">Item detected: {result.label} </span>
+                  <span className="confidence">
+                    Confidence level: {result.score}{" "}
+                    {index === 0 && (
+                      <span className="bestGuess">Best Guess</span>
+                    )}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
         {imageURL && (
-          <button className="button" onClick={identify}>
-            Identify Image
-          </button>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "20vh",
+            }}
+          >
+            <Button onClick={identify} class="middle">
+              IDENTIFY IMAGE
+            </Button>
+          </div>
         )}
       </div>
       {history.length > 0 && (
