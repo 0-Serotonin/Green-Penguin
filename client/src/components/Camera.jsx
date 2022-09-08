@@ -1,26 +1,33 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { useState, useEffect, useRef } from "react";
+
 import styled from "styled-components";
+
 import * as tf from "@tensorflow/tfjs";
 import { loadGraphModel } from "@tensorflow/tfjs-converter";
 
-tf.setBackend("webgl");
-
-const threshold = 0.75;
-
-let classesDir = {
-  1: {
-      name: 'Kangaroo',
-      id: 1,
-  },
-  2: {
-      name: 'Other',
-      id: 2,
-  }
-}
-
 function Camera() {
+
+  let classesDir = {
+    0: {
+        name: 'electric battery',
+        id: 0,
+    },
+    1: {
+        name: 'light bulb',
+        id: 1,
+    },
+    2: {
+        name: 'plastic bottle',
+        id: 2,
+    },
+    3: {
+        name: 'smart phone',
+        id: 3,
+    }
+  }
+  
+
   const [isModelLoading, setIsModelLoading] = useState(false);
   const [model, setModel] = useState(null);
   const [imageURL, setImageURL] = useState(null);
@@ -30,7 +37,6 @@ function Camera() {
   const imageRef = useRef();
   const textInputRef = useRef();
   const fileInputRef = useRef();
-
 
   const loadModel = async () => {
     setIsModelLoading(true);
@@ -57,12 +63,19 @@ function Camera() {
   };
 
   const identify = async () => {
-    const tensorImg = tf.browser
-      .fromPixels(imageRef.current)
-      .resizeNearestNeighbor([640, 640])
-      .toFloat()
-      .expandDims();
-    const results = await model.executeAsync(tensorImg);
+
+    let [modelWidth, modelHeight] = model.inputs[0].shape.slice(1, 3);
+
+    const input = tf.tidy(() => {
+      return tf.image.resizeBilinear(tf.browser.fromPixels(imageRef.current), [modelWidth, modelHeight])
+        .div(255.0).expandDims(0);
+    });
+
+
+    const results = await model.executeAsync(input);
+
+
+    
 
     const [boxes, scores, classes, valid_detections] = results;
     const boxes_data = boxes.dataSync();
@@ -72,35 +85,20 @@ function Camera() {
 
     tf.dispose(results);
 
+    const detectionObjects = [];
+
     var i;
     for (i = 0; i < valid_detections_data; ++i) {
       const klass = classes_data[i];
-      const score = scores_data[i].toFixed(2);
+      const score = scores_data[i].toFixed(4);
       console.log(klass, score);
+      detectionObjects.push({
+              label: classesDir[classes_data[i]].name,
+              score: scores_data[i].toFixed(4),
+            })
     }
 
-    // // output is an array of tf.tensor.
-    // results.forEach((t) => t.print()); // log out the data of all tensors
-    // const data = [];
-    // for (let i = 0; i < results.length; i++) data.push(results[i].dataSync()); // get the data
-
-    // const scores = results[1].arraySync();
-    // const classes = results[2].dataSync();
-
-    // const threshold = 0.8;
-
-    // const detectionObjects = [];
-    // scores.forEach((score, i) => {
-    //   if (score[i] > threshold) {
-    //     detectionObjects.push({
-    //       class: classes[i],
-    //       label: classesDir[classes[i]].name,
-    //       score: score[i].toFixed(2),
-    //     });
-    //   }
-    // });
-
-    // setResults(detectionObjects);
+    setResults(detectionObjects);
   };
 
   const handleOnChange = (e) => {
@@ -136,6 +134,7 @@ function Camera() {
       </div>
     );
   }
+  
 
   return (
     <div class="container">
@@ -250,7 +249,26 @@ function Camera() {
           </div>
         </div>
       )}
+
+
+
+
+
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   );
 }
 const Button = styled.button`
