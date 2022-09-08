@@ -1,7 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
+import * as tf from '@tensorflow/tfjs';
+import {loadGraphModel} from '@tensorflow/tfjs-converter';
+
 function Camera() {
+
+  // const MODEL_URL = 'camera/model.json';
+
+  // const model = await loadGraphModel(MODEL_URL);
+
+
     return (
     <div class="container">
       <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height: '20vh'}}>
