@@ -7,26 +7,24 @@ import * as tf from "@tensorflow/tfjs";
 import { loadGraphModel } from "@tensorflow/tfjs-converter";
 
 function Camera() {
-
   let classesDir = {
     0: {
-        name: 'electric battery',
-        id: 0,
+      name: "electric battery",
+      id: 0,
     },
     1: {
-        name: 'light bulb',
-        id: 1,
+      name: "light bulb",
+      id: 1,
     },
     2: {
-        name: 'plastic bottle',
-        id: 2,
+      name: "plastic bottle",
+      id: 2,
     },
     3: {
-        name: 'smart phone',
-        id: 3,
-    }
-  }
-  
+      name: "smart phone",
+      id: 3,
+    },
+  };
 
   const [isModelLoading, setIsModelLoading] = useState(false);
   const [model, setModel] = useState(null);
@@ -35,7 +33,6 @@ function Camera() {
   const [history, setHistory] = useState([]);
 
   const imageRef = useRef();
-  const textInputRef = useRef();
   const fileInputRef = useRef();
 
   const loadModel = async () => {
@@ -63,22 +60,21 @@ function Camera() {
   };
 
   const identify = async () => {
-
     let [modelWidth, modelHeight] = model.inputs[0].shape.slice(1, 3);
 
     const input = tf.tidy(() => {
-      return tf.image.resizeBilinear(tf.browser.fromPixels(imageRef.current), [modelWidth, modelHeight])
-        .div(255.0).expandDims(0);
+      return tf.image
+        .resizeBilinear(tf.browser.fromPixels(imageRef.current), [
+          modelWidth,
+          modelHeight,
+        ])
+        .div(255.0)
+        .expandDims(0);
     });
-
 
     const results = await model.executeAsync(input);
 
-
-    
-
-    const [boxes, scores, classes, valid_detections] = results;
-    const boxes_data = boxes.dataSync();
+    const [boxes, scores, classes, valid_detections] = results; // need box to fill up unneeded data
     const scores_data = scores.dataSync();
     const classes_data = classes.dataSync();
     const valid_detections_data = valid_detections.dataSync()[0];
@@ -89,21 +85,13 @@ function Camera() {
 
     var i;
     for (i = 0; i < valid_detections_data; ++i) {
-      const klass = classes_data[i];
-      const score = scores_data[i].toFixed(4);
-      console.log(klass, score);
       detectionObjects.push({
-              label: classesDir[classes_data[i]].name,
-              score: scores_data[i].toFixed(4),
-            })
+        label: classesDir[classes_data[i]].name,
+        score: scores_data[i].toFixed(4),
+      });
     }
 
     setResults(detectionObjects);
-  };
-
-  const handleOnChange = (e) => {
-    setImageURL(e.target.value);
-    setResults([]);
   };
 
   const triggerUpload = () => {
@@ -134,7 +122,6 @@ function Camera() {
       </div>
     );
   }
-  
 
   return (
     <div class="container">
@@ -148,8 +135,9 @@ function Camera() {
       >
         <h1 class="font-weight-light">Catergroy Classification</h1>
       </div>
+
       <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-8">
           <h3
             style={{
               fontFamily: "Playfield display",
@@ -160,17 +148,11 @@ function Camera() {
             Find out where to recycle your items
           </h3>
         </div>
-        <div class="col-lg-3">
-          <input
-            type="text"
-            placeholder="Paste Image URL"
-            ref={textInputRef}
-            onChange={handleOnChange}
-          />
-        </div>
+
         <div class="col-lg-2">
           <Button onClick={triggerUpload}>UPLOAD IMAGE</Button>
         </div>
+
         <div class="col-lg-2">
           <Button onClick={null}>USE CAMERA</Button>
         </div>
@@ -200,6 +182,21 @@ function Camera() {
             )}
           </div>
 
+          {imageURL && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "20vh",
+              }}
+            >
+              <Button onClick={identify} class="middle">
+                IDENTIFY IMAGE
+              </Button>
+            </div>
+          )}
+
           <div className="resultsHolder">
             {results.map((result, index) => {
               return (
@@ -216,20 +213,6 @@ function Camera() {
             })}
           </div>
         </div>
-        {imageURL && (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "20vh",
-            }}
-          >
-            <Button onClick={identify} class="middle">
-              IDENTIFY IMAGE
-            </Button>
-          </div>
-        )}
       </div>
       {history.length > 0 && (
         <div className="recentPredictions">
@@ -240,7 +223,7 @@ function Camera() {
                 <div className="recentPrediction" key={`${image}${index}`}>
                   <img
                     src={image}
-                    alt="Recent Prediction"
+                    alt="Recent Predictions"
                     onClick={() => setImageURL(image)}
                   />
                 </div>
@@ -249,28 +232,10 @@ function Camera() {
           </div>
         </div>
       )}
-
-
-
-
-
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   );
 }
+
 const Button = styled.button`
   background-color: white;
   padding: 8px 8px 8px 32px;
@@ -283,4 +248,5 @@ const Button = styled.button`
   background-repeat: no-repeat;
   background-position: 8px 8px;
 `;
+
 export default Camera;
