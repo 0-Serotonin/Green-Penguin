@@ -159,3 +159,113 @@ a:hover {
   visibility: hidden;
   opacity: 0;
 }
+
+.imageHolder {
+  width: 80%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  flex: 0 0 100%;
+  max-width: 800px;
+
+}
+@media (max-width: 800px) {
+  .imageHolder {
+    width: 100%;
+    height: auto;
+ }
+}
+.imageHolder:empty {
+  display: none;
+}
+.imageHolder img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recentPredictions {
+  margin: 40px 0 0;
+  background: #dac2ff;
+  padding: 10px;
+}
+.recentPredictions h2 {
+  color: #111;
+  font-size: 26px;
+  margin: 10px 0;
+}
+.recentPredictions .recentImages {
+  display: flex;
+  flex-wrap: wrap;
+}
+.recentPredictions .recentPrediction {
+  flex: 0 0 20%;
+  cursor: pointer;
+}
+@media (max-width: 1100px) {
+  .recentPredictions .recentPrediction {
+    flex: 0 0 25%;
+ }
+}
+@media (max-width: 870px) {
+  .recentPredictions .recentPrediction {
+    flex: 0 0 33.3%;
+ }
+}
+@media (max-width: 700px) {
+  .recentPredictions .recentPrediction {
+    flex: 0 0 50%;
+ }
+}
+.recentPredictions .recentPrediction img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+@media (max-width: 700px) {
+  .recentPredictions .recentPrediction img {
+    height: 260px;
+ }
+}
+
+.resultsHolder {
+  padding: 30px;
+}
+@media (max-width: 800px) {
+  .resultsHolder {
+    width: 100%;
+    padding: 0;
+ }
+}
+.resultsHolder .result {
+  border: 1px solid #333;
+  margin: 0 0 10px;
+  padding: 10px;
+}
+.resultsHolder .result:first-of-type {
+  border-color: #333;
+  background-color: #333;
+}
+.resultsHolder .result:first-of-type .name {
+  color: #fff;
+}
+.resultsHolder .result:first-of-type .confidence {
+  color: #dfdfdf;
+}
+.resultsHolder .result .name {
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.resultsHolder .result .confidence {
+  display: block;
+  font-weight: 300;
+}
+.resultsHolder .result .confidence .bestGuess {
+  background: #fff;
+  padding: 2px 6px;
+  color: #333;
+  margin-left: 3px;
+}
