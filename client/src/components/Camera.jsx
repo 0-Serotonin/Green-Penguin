@@ -128,7 +128,16 @@ function Camera() {
   }, [imageURL]);
 
   if (isModelLoading) {
-    return <h2>Model Loading...</h2>;
+    return <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "20vh",
+    }}
+  >
+    <h1 class="font-weight-light">Model Loading...</h1>
+  </div>;
   }
 
   return (
