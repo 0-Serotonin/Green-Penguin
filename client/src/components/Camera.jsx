@@ -64,7 +64,7 @@ function Camera() {
     setIsModelLoading(true);
     try {
       const model = await loadGraphModel(
-        "https://raw.githubusercontent.com/jeslynlamxy/whack-model-storage/main/model.json"
+        "https://raw.githubusercontent.com/jeslynlamxy/whack-model-deployment/main/green_penguins/model.json"
       );
       setModel(model);
       setIsModelLoading(false);
