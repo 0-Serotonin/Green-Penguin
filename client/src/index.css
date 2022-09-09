@@ -169,7 +169,7 @@ a:hover {
   max-width: 800px;
 
 }
-@media (max-width: 800px) {
+@media (max-width: 720px) {
   .imageHolder {
     width: 100%;
     height: auto;
