@@ -269,3 +269,37 @@ a:hover {
   color: #333;
   margin-left: 3px;
 }
+
+.recycleGuideHolder {
+  padding: 0px;
+}
+@media (max-width: 800px) {
+  .recycleGuideHolder {
+    width: 100%;
+    padding: 0;
+ }
+}
+.recycleGuideHolder .result {
+  border: 1px solid rgb(53, 123, 49);
+  margin: 0 0 10px;
+  padding: 10px;
+}
+.recycleGuideHolder .result:first-of-type {
+  border-color: rgb(53, 123, 49);
+  background-color: rgb(53, 123, 49);
+}
+.recycleGuideHolder .result:first-of-type .name {
+  color: #ffffff;
+}
+.recycleGuideHolder .result:first-of-type .funfact {
+  color: #ffffff;
+}
+.recycleGuideHolder .result .name {
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.recycleGuideHolder .result .funfact {
+  display: block;
+  font-weight: 300;
+}

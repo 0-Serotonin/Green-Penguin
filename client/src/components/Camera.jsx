@@ -6,23 +6,34 @@ import styled from "styled-components";
 import * as tf from "@tensorflow/tfjs";
 import { loadGraphModel } from "@tensorflow/tfjs-converter";
 
+// history function works but is buggy
+
 function Camera() {
   let classesDir = {
     0: {
-      name: "electric battery",
+      name: "Electric Battery",
       id: 0,
+      catergroy: "E-Waste",
+      fact: "Rechargeable batteries consume less natural resources!",
     },
     1: {
-      name: "light bulb",
+      name: "Light Bulb",
       id: 1,
+      catergroy: "Lighting Waste",
+      fact: "LEDs use about 75 per cent less energy, lasts 5 to 10 times longer and do not contain toxins such as mercury!",
     },
     2: {
-      name: "plastic bottle",
+      name: "Plastic Bottle",
       id: 2,
+      catergroy: "Common Recyclables",
+      fact: "There are more than 8,000 blue recycling bins in residential estates all over Singapore!",
+      // https://www.onemap.gov.sg/main/v2/
     },
     3: {
-      name: "smart phone",
+      name: "Smart Phone",
       id: 3,
+      catergroy: "E-Waste",
+      fact: "Steve jobs was not able to tell the difference between the iPhone 13 and 14, how shocking!",
     },
   };
 
@@ -31,7 +42,7 @@ function Camera() {
 
   const [imageURL, setImageURL] = useState(null);
   const [results, setResults] = useState([]);
-  const [history, setHistory] = useState([]);
+  // const [history, setHistory] = useState([]);
 
   const imageRef = useRef();
   const fileInputRef = useRef();
@@ -76,6 +87,7 @@ function Camera() {
   };
 
   const triggerUpload = () => {
+    setHasPhoto(false);
     setMode(false); //falseIsUploadTrueIsCamera
     fileInputRef.current.click();
   };
@@ -106,6 +118,8 @@ function Camera() {
       detectionObjects.push({
         label: classesDir[classes_data[i]].name,
         score: scores_data[i].toFixed(4),
+        catergroy: classesDir[classes_data[i]].catergroy,
+        fact: classesDir[classes_data[i]].fact,
       });
     }
     setResults(detectionObjects);
@@ -115,16 +129,13 @@ function Camera() {
     loadModel();
   }, []);
 
-  useEffect(() => {
-    if (imageURL) {
-      setHistory([imageURL, ...history]);
-    }
-  }, [imageURL]);
+  // useEffect(() => {
+  //   if (imageURL) {
+  //     setHistory([imageURL, ...history]);
+  //   }
+  // }, [imageURL]);
 
   // handles webcam detection
-
-  // why is uploading image and webcam usage implemented seperate?
-  // they function differently thus requiring stacked implementation where only one would exist at any one time.
 
   const getVideo = () => {
     setMode(true); //falseIsUploadTrueIsCamera
@@ -185,6 +196,8 @@ function Camera() {
       detectionObjects.push({
         label: classesDir[classes_data[i]].name,
         score: scores_data[i].toFixed(4),
+        catergroy: classesDir[classes_data[i]].catergroy,
+        fact: classesDir[classes_data[i]].fact,
       });
     }
     setResults(detectionObjects);
@@ -240,7 +253,7 @@ function Camera() {
             {playing ? (
               <Button onClick={stopVideo}>STOP WEBCAM</Button>
             ) : (
-              <Button onClick={getVideo}>USE WEBCAM</Button>
+              <Button onClick={getVideo}>START WEBCAM</Button>
             )}
           </div>
         </div>
@@ -256,20 +269,6 @@ function Camera() {
           ref={fileInputRef}
         />
       </div>
-
-      {/* <div className="resultsHolder">
-        {results.map((result, index) => {
-          return (
-            <div className="result" key={index}>
-              <span className="name">How to recycle item detected: {result.label} </span>
-              <span className="confidence">
-                Confidence level: {result.score}{" "}
-                {index === 0 && <span className="bestGuess">Best Guess</span>}
-              </span>
-            </div>
-          );
-        })}
-      </div> */}
 
       {/* one or the other */}
 
@@ -357,21 +356,51 @@ function Camera() {
           );
         })}
       </div>
+
+      <div className="recycleGuideHolder">
+        {results.map((result, index) => {
+          return (
+            <div className="result" key={index}>
+              <span className="name">
+                Recycling catergroy: {result.catergroy}
+              </span>
+              <span className="funfact">Did you know? {result.fact}</span>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* {history.length > 0 && (
+        <div className="recentPredictions">
+          <h2>Recent Images</h2>
+          <div className="recentImages">
+            {history.map((image, index) => {
+              return (
+                <div className="recentPrediction" key={`${image}${index}`}>
+                  <img
+                    src={image}
+                    alt="Recent Prediction"
+                    onClick={() => setImageURL(image)}
+                  />
+                </div>
+              );
+            })}
+
+          </div>
+        </div>
+      )} */}
     </div>
   );
 }
 
 const Button = styled.button`
   background-color: white;
-  padding: 8px 8px 8px 32px;
   color: black;
-  font-size: 12px;
+  font-size: 15px;
+  padding: 8px 8px 8px 8px;
   border-radius: 10px;
-  margin: 1px 100px
+  margin: 10px 10px
   cursor: pointer;
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAABmJLR0QA/wD/AP+gvaeTAAAA7UlEQVQ4jb2UTQ6CQAyFv4gxEXfq0jvoxp97qZxJb+Fag3oBFihnYKESXdCJk8kUERNf0jTTljd9pQB/RgD0xTdCD4iAGCiAJ/CQ8xoI6xItgEwINLsC8zpE+QciYzkwq5KmdXRS4hdNclQhCfG+/MpHFivFieQTJX8wBG3xATB2yDPg5nQG0AFGVt1Eni9MYOjcdvS1bsGd4cBOBpR75M4qAXZSs5OzO7s7noVuOrO9IWhZZBtFUsfxLra+YOiRYOysxFOgq1zCnO++gKlGZDCj3OwqorQOkS15RbmQd95v7QAsq6R9ws//s0Z4AYPMj/ARKOC7AAAAAElFTkSuQmCC);
-  background-repeat: no-repeat;
-  background-position: 8px 8px;
 `;
 
 export default Camera;
