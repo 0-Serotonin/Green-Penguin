@@ -134,7 +134,7 @@ export default function MapRoute() {
                         </Box>
 
                         <ButtonGroup>
-                            <Button colorScheme='pink' type='submit' onClick={calculateRoute}>
+                            <Button colorScheme='gray' type='submit' onClick={calculateRoute}>
                                 Calculate Route
                             </Button>
                             <IconButton
