@@ -21,6 +21,7 @@ import {
   Cash,
   OldProducts,
   Map,
+  MapRoute,
 } from "./components";
 import {UserContext} from './components/UserContext'
 
@@ -55,6 +56,7 @@ function AppRouter(){
                 <Route className path="/cash" element={<Cash/>} />
                 <Route className path="/OldProducts" element={<OldProducts/>} />
                 <Route className path="/map" element={<Map/>} />
+                <Route className path="/MapRoute" element={<MapRoute/>} />
             </Routes>
             </UserContext.Provider>
             <Footer />

@@ -5,6 +5,7 @@ import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocom
 import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 import { useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 const libraries = ["places"];
@@ -31,7 +32,7 @@ export default function Map(props) {
     const [selectedPoint, setSelectedPoint] = useState(null);
 
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: "AIzaSyBL0wqyCym-8QPPVK-ZME2-trqeA89EN7c",
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
         libraries,
     })
 
@@ -42,7 +43,7 @@ export default function Map(props) {
 
     const panTo = React.useCallback(({ lat, lng }) => {
         mapRef.current.panTo({ lat, lng });
-        mapRef.current.setZoom(17);
+        mapRef.current.setZoom(15);
     }, []);
 
     const [markers, setMarkers] = React.useState([]);
@@ -55,6 +56,7 @@ export default function Map(props) {
     return <div>
         <Search panTo={panTo} />
         <Locate panTo={panTo} />
+        <CalculateRoute />
 
         <GoogleMap
             mapContainerStyle={mapContainerStyle}
@@ -62,7 +64,7 @@ export default function Map(props) {
             center={center}
             options={options}
             onLoad={onMapLoad}
-            onClick={(event) => {
+            onClick={() => {
                 setMarkers(() => [{
                     lat: yourLatitude,
                     lng: yourLongitude,
@@ -73,7 +75,7 @@ export default function Map(props) {
             {markers.map(marker => (
                 <Marker
                     key={marker.lat}
-                    position={{lat: marker.lat, lng: marker.lng}}
+                    position={{ lat: marker.lat, lng: marker.lng }}
                 />
             ))}
 
@@ -81,8 +83,7 @@ export default function Map(props) {
                 url={url}
                 options={{ preserveViewport: true }}
             />
-
-            {selectedPoint && (
+            {/* {selectedPoint && (
                 <InfoWindow
                     position={{
                         lat: selectedPoint.geometry.coordinates[1],
@@ -97,7 +98,7 @@ export default function Map(props) {
                         <ul>{selectedPoint.properties.Description}</ul>
                     </span>
                 </InfoWindow>
-            )}
+            )} */}
 
         </GoogleMap>
     </div>
@@ -117,6 +118,16 @@ function Locate({ panTo }) {
         }}>
             <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Compass.svg" alt="compass - Locate Me" />
         </button>
+    );
+}
+
+function CalculateRoute() {
+    return (
+        <NavLink className="nav-link" to="/MapRoute">
+            <button className="calculateRoute">
+                <img src="https://www.svgrepo.com/show/186025/route.svg" alt="Find Route" />
+            </button>
+        </NavLink>
     );
 }
 
