@@ -18,7 +18,7 @@ router.route('/createThread').post((req,res) =>{
 })
 
 router.get('/getThread', (req,res) =>{
-    Thread.find()
+    Thread.find().sort({updatedAt:-1})
         .then(foundThread => res.json(foundThread))
         .catch(err => console.log(err));
     

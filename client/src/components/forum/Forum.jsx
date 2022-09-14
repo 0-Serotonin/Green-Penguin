@@ -37,7 +37,7 @@ function Forum(){
     navigate(loggedIn ? '/createPost' : '/login') 
 
   }
-
+  
   return(
       <div class="container">
       <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height: '20vh'}}>
