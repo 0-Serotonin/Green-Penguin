@@ -228,7 +228,7 @@ function Camera() {
           height: "20vh",
         }}
       >
-        <h1 class="font-weight-light">Catergroy Classification</h1>
+        <h1 class="font-weight-light">Category Classification</h1>
       </div>
 
       <div class="row">
@@ -362,7 +362,7 @@ function Camera() {
           return (
             <div className="result" key={index}>
               <span className="name">
-                Recycling catergroy: {result.catergroy}
+                Recycling Category: {result.catergroy}
               </span>
               <span className="funfact">Did you know? {result.fact}</span>
             </div>
