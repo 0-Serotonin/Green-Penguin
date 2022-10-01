@@ -12,28 +12,24 @@ function Camera() {
       id: 0,
       catergroy: "E-Waste",
       fact: "Rechargeable batteries consume less natural resources!",
-      link: "https://geo.data.gov.sg/ewaste/2021/09/24/kml/ewaste.kml"
     },
     1: {
       name: "Light Bulb",
       id: 1,
       catergroy: "Lighting Waste",
       fact: "LEDs use about 75 per cent less energy, lasts 5 to 10 times longer and do not contain toxins such as mercury!",
-      link: "https://geo.data.gov.sg/ewaste/2021/09/24/kml/ewaste.kml"
     },
     2: {
       name: "Plastic Bottle",
       id: 2,
       catergroy: "Common Recyclables",
       fact: "There are more than 8,000 blue recycling bins in residential estates all over Singapore!",
-      link: "https://www.onemap.gov.sg/main/v2/"
     },
     3: {
       name: "Smart Phone",
       id: 3,
       catergroy: "E-Waste",
       fact: "Steve jobs was not able to tell the difference between the iPhone 13 and 14, how shocking!",
-      link: "https://geo.data.gov.sg/ewaste/2021/09/24/kml/ewaste.kml"
     },
   };
 
@@ -357,15 +353,54 @@ function Camera() {
                 Recycling Category: {result.catergroy}
               </span>
               <span className="funfact">Did you know? {result.fact}</span>
-              <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height: '10vh'}}>
-                    <NavLink className="nav-link" to="/map" state={{url:"https://geo.data.gov.sg/ewaste/2021/09/24/kml/ewaste.kml"}}>
-                      <ul><Button>RECYCLE NOW</Button></ul></NavLink>
-                  </div> 
+              {result.catergroy === "Lighting Waste" && (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "10vh",
+                  }}
+                >
+                  <NavLink
+                    className="nav-link"
+                    to="/map"
+                    state={{
+                      url: "https://geo.data.gov.sg/lighting/2019/10/01/kml/lighting.kml",
+                    }}
+                  >
+                    <ul>
+                      <Button>RECYCLE LIGHTING WASTE NOW</Button>
+                    </ul>
+                  </NavLink>
+                </div>
+              )}
+              {result.catergroy === "E-Waste" && (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "10vh",
+                  }}
+                >
+                  <NavLink
+                    className="nav-link"
+                    to="/map"
+                    state={{
+                      url: "https://geo.data.gov.sg/ewaste/2021/09/24/kml/ewaste.kml",
+                    }}
+                  >
+                    <ul>
+                      <Button>RECYCLE E-WASTE NOW</Button>
+                    </ul>
+                  </NavLink>
+                </div>
+              )}
             </div>
           );
         })}
       </div>
-
     </div>
   );
 }
