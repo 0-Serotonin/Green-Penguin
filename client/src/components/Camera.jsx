@@ -1,12 +1,9 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-
 import * as tf from "@tensorflow/tfjs";
 import { loadGraphModel } from "@tensorflow/tfjs-converter";
-
-// history function works but is buggy
 
 function Camera() {
   let classesDir = {
@@ -15,25 +12,28 @@ function Camera() {
       id: 0,
       catergroy: "E-Waste",
       fact: "Rechargeable batteries consume less natural resources!",
+      link: "https://geo.data.gov.sg/ewaste/2021/09/24/kml/ewaste.kml"
     },
     1: {
       name: "Light Bulb",
       id: 1,
       catergroy: "Lighting Waste",
       fact: "LEDs use about 75 per cent less energy, lasts 5 to 10 times longer and do not contain toxins such as mercury!",
+      link: "https://geo.data.gov.sg/ewaste/2021/09/24/kml/ewaste.kml"
     },
     2: {
       name: "Plastic Bottle",
       id: 2,
       catergroy: "Common Recyclables",
       fact: "There are more than 8,000 blue recycling bins in residential estates all over Singapore!",
-      // https://www.onemap.gov.sg/main/v2/
+      link: "https://www.onemap.gov.sg/main/v2/"
     },
     3: {
       name: "Smart Phone",
       id: 3,
       catergroy: "E-Waste",
       fact: "Steve jobs was not able to tell the difference between the iPhone 13 and 14, how shocking!",
+      link: "https://geo.data.gov.sg/ewaste/2021/09/24/kml/ewaste.kml"
     },
   };
 
@@ -128,14 +128,6 @@ function Camera() {
   useEffect(() => {
     loadModel();
   }, []);
-
-  // useEffect(() => {
-  //   if (imageURL) {
-  //     setHistory([imageURL, ...history]);
-  //   }
-  // }, [imageURL]);
-
-  // handles webcam detection
 
   const getVideo = () => {
     setMode(true); //falseIsUploadTrueIsCamera
@@ -365,30 +357,17 @@ function Camera() {
                 Recycling Category: {result.catergroy}
               </span>
               <span className="funfact">Did you know? {result.fact}</span>
+              
+              <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height: '10vh'}}>
+                    <NavLink className="nav-link" to="/map" state={{url:result.link}}>
+                      <ul><Button>RECYCLE NOW</Button></ul></NavLink>
+                  </div> 
+
             </div>
           );
         })}
       </div>
 
-      {/* {history.length > 0 && (
-        <div className="recentPredictions">
-          <h2>Recent Images</h2>
-          <div className="recentImages">
-            {history.map((image, index) => {
-              return (
-                <div className="recentPrediction" key={`${image}${index}`}>
-                  <img
-                    src={image}
-                    alt="Recent Prediction"
-                    onClick={() => setImageURL(image)}
-                  />
-                </div>
-              );
-            })}
-
-          </div>
-        </div>
-      )} */}
     </div>
   );
 }
