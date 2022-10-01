@@ -357,12 +357,10 @@ function Camera() {
                 Recycling Category: {result.catergroy}
               </span>
               <span className="funfact">Did you know? {result.fact}</span>
-              
               <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height: '10vh'}}>
                     <NavLink className="nav-link" to="/map" state={{url:"https://geo.data.gov.sg/ewaste/2021/09/24/kml/ewaste.kml"}}>
                       <ul><Button>RECYCLE NOW</Button></ul></NavLink>
                   </div> 
-                  
             </div>
           );
         })}
