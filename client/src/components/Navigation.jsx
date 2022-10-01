@@ -9,7 +9,7 @@ function Navigation() {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
           
-          <h4 className style={{ fontFamily: "Playfair Display", fontWeight: 'bold'}}>Green Pirates Inc</h4>
+          <h4 className style={{ fontFamily: "Playfair Display", fontWeight: 'bold'}}>Green Penguins Inc</h4>
 
           <div>
             <ul className="navbar-nav mx-auto">
