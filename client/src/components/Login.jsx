@@ -51,14 +51,15 @@ function Login(){
     margin: 10px 0px;
     cursor: pointer;
     `;
-    const Lbutton = styled.button`
-    background-color: white;
-    color: white;
-    border-radius: 2px;
-    border-width: px;
-    margin: 10px 0px;
-    cursor: pointer;
-    `;
+    const LogoutButton = styled.button`
+  background-color: white;
+  color: black;
+  font-size: 15px;
+  padding: 8px 8px 8px 8px;
+  border-radius: 10px;
+  margin: 10px 10px
+  cursor: pointer;
+`;
     return (
         <div className="login">
             <GoogleLogout
@@ -115,7 +116,7 @@ function Login(){
                 <GoogleLogout
                     clientId={clientId}
                     render={renderProps => (
-                        <button onClick={renderProps.onClick}>Logout</button>
+                        <LogoutButton onClick={renderProps.onClick}>Logout</LogoutButton>
                     )}
                     buttonText="Logout"
                     onLogoutSuccess={onLogoutSuccess}

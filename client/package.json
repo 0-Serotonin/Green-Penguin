@@ -11,6 +11,7 @@
     "@ant-design/icons": "^4.7.0",
     "@chakra-ui/react": "^1.8.9",
     "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
     "@reach/combobox": "^0.16.5",
     "@react-google-maps/api": "^2.7.0",
     "@tensorflow-models/coco-ssd": "^2.2.2",
