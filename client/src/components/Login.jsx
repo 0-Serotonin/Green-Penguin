@@ -5,6 +5,8 @@ import NotLoggedIn from './forum/NotLoggedIn';
 import { UserContext } from './UserContext';
 import styled from "styled-components";
 
+import FacebookLogin from 'react-facebook-login';
+
 const clientId = "932974881889-v6t381i4seng1vl0avklaf70li7ok1pg.apps.googleusercontent.com";
 
 function Login(){
@@ -13,6 +15,18 @@ function Login(){
     const[showLoginButton, setShowLoginButton]= useState(true);
     const[showLogoutButton, setShowLogoutButton] = useState(false);
 
+    //FOR FACEEBOOK
+    const responseFacebook = (fbresponse) => {
+        console.log("login result", fbresponse);
+        setUser(fbresponse);
+        setShowLoginButton(false);
+        setShowLogoutButton(true);
+      }
+    const componentClicked =(data)=>{
+        console.warn(data)
+    }
+
+    //FOR GOOGLE
     const onLoginSuccess = (res) => {
         console.log('[Login Success] currentUser:', res.profileObj);
         setShowLoginButton(false);
@@ -37,6 +51,14 @@ function Login(){
     margin: 10px 0px;
     cursor: pointer;
     `;
+    const Lbutton = styled.button`
+    background-color: white;
+    color: white;
+    border-radius: 2px;
+    border-width: px;
+    margin: 10px 0px;
+    cursor: pointer;
+    `;
     return (
         <div className="login">
             <GoogleLogout
@@ -58,17 +80,31 @@ function Login(){
             }
             { showLoginButton ?
                 <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height: '20vh'}}>
-                <GoogleLogin
-                    disabled={false}
-                    clientId={clientId}
-                    buttonText="Login"
-                    onSuccess={onLoginSuccess}
-                    onFailure={onLoginFailure}
-                    cookiePolicy={'single_host origin'}
-                    style={{ marginTop: '100px' }}
-                    isSignedIn={true}
-                />
+                    <div>
+                    <GoogleLogin
+                        disabled={false}
+                        clientId={clientId}
+                        buttonText="Login"
+                        onSuccess={onLoginSuccess}
+                        onFailure={onLoginFailure}
+                        cookiePolicy={'single_host origin'}
+                        style={{ marginTop: '100px' }}
+                        isSignedIn={true}
+                    /></div>
+                    <div style={{width:'3vh'}}></div>
+                    <div>
+                    <FacebookLogin
+                        appId="635646154668416"
+                        autoLoad={true}
+                        fields="name,email,picture"
+                        onClick={componentClicked}
+                        callback={responseFacebook} 
+                        textButton = "Login"
+                        icon="fa-facebook"
+                        size = "small"
+                    /></div>
                 </div>
+                
                 : null
             }
             { showLogoutButton ?
@@ -78,6 +114,9 @@ function Login(){
                 <div style={{display: 'flex', justifyContent:'center', alignItems:'center', height:'20vh'}}>
                 <GoogleLogout
                     clientId={clientId}
+                    render={renderProps => (
+                        <button onClick={renderProps.onClick}>Logout</button>
+                    )}
                     buttonText="Logout"
                     onLogoutSuccess={onLogoutSuccess}
                 >
